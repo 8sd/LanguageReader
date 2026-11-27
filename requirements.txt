@@ -1,2 +1,2 @@
-mistralai>=1.2,<2
+mistralai>=3,<4
 flask>=3.0

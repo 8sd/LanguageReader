@@ -4,7 +4,8 @@ import re
 import sys
 from pathlib import Path
 
-from mistralai import Mistral
+from mistralai.client import Mistral
+from mistralai.client.models import SystemMessage, UserMessage
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "config.json"
@@ -68,11 +69,14 @@ def main():
     response = client.chat.complete(
         model=config["model"],
         messages=[
-            {"role": "system", "content": build_prompt(config, level)},
-            {"role": "user", "content": "Schreibe das nächste Kapitel der Geschichte."},
+            SystemMessage(content=build_prompt(config, level)),
+            UserMessage(content="Schreibe das nächste Kapitel der Geschichte."),
         ],
     )
-    markdown = response.choices[0].message.content.strip()
+    content = response.choices[0].message.content
+    if isinstance(content, list):
+        content = "".join(getattr(chunk, "text", "") for chunk in content)
+    markdown = content.strip()
 
     unit = next_unit_number()
     first_line = markdown.splitlines()[0] if markdown else ""
