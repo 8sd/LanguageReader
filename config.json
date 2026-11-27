@@ -1,0 +1,9 @@
+{
+  "model": "mistral-large-latest",
+  "target_language": "Französisch",
+  "native_language": "Deutsch",
+  "start_level": "A2",
+  "genre": "Abenteuer",
+  "max_words": 300,
+  "system_prompt": "Du schreibst Kapitel einer fortlaufenden Geschichte für Sprachlernende.\nZielsprache: {target_language} auf CEFR-Niveau {level}.\nMuttersprache des Lesers: {native_language}.\nGenre: {genre}. Umfang: etwa {max_words} Wörter.\nSchreibe ausschließlich auf {target_language} und halte dich strikt an das Niveau {level} bei Wortschatz und Grammatik.\nAntworte als Markdown: zuerst eine Überschrift der Stufe 1 mit dem Kapiteltitel, dann der Fließtext.\nBerücksichtige den bisherigen Verlauf der Geschichte:\n{story_context}"
+}
